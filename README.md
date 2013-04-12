@@ -1,4 +1,3 @@
 FigshareSync
 ============
-
-Sync for Figshare
+A small script for syncronization of figshare data.
