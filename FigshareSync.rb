@@ -1,4 +1,4 @@
-require 'oath'
+require 'ouath'
 require 'json'
 
 consumer = OAuth::Consumer.new('key','secret',{:site=>"http://api.figshare.com"})
