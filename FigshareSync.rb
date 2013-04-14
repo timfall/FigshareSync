@@ -7,12 +7,10 @@ token = { :oauth_token => 'Ep6EHnBqnazUeeKfTQn9HwrC7mvfwynQHr00mAZo07iwEp6EHnXqn
         }
 client = OAuth::AccessToken.from_hash(consumer, token)
 
-client.get('/v1/my_data/articles') { |articlelist|
+result = client.get('/v1/my_data/articles')
 #debug
-#puts articlelist.body_permitted?
-print (articlelist.body)
-}
+puts (result.body)
 
 #Parse the article list and get values
-#parsed = JSON.parse(articlelist)
-#articlecount = parsed.count
+parsed = JSON.parse(result.body)
+puts parsed.count
