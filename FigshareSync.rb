@@ -7,10 +7,17 @@ token = { :oauth_token => 'Ep6EHnBqnazUeeKfTQn9HwrC7mvfwynQHr00mAZo07iwEp6EHnXqn
         }
 client = OAuth::AccessToken.from_hash(consumer, token)
 
-result = client.get('/v1/my_data/articles')
+articlelist = client.get('/v1/my_data/articles')
 #debug
-puts (result.body)
+puts (articlelist.body)
 
 #Parse the article list and get values
-parsed = JSON.parse(result.body)
+parsed = JSON.parse(articlelist.body)
 puts parsed.count
+
+parsed.count do 
+    |currentfile|
+    inputfile = File.open ('file.example')#file.example should be replaced with local file
+    filehash = OpenSSL::Digest.new('sha256', 'inputfile')
+    puts "#{inputfile} has #{filehash.name} hash of #{filehash}"#debug
+    end
