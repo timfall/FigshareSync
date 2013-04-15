@@ -14,10 +14,13 @@ puts (articlelist.body)
 #Parse the article list and get values
 parsed = JSON.parse(articlelist.body)
 puts parsed.count
+puts parsed['count']
+i = 2#parsed['count']
+puts i
 
-parsed.count do 
+i.times do#i should be replaced with parsed['count']
     |currentfile|
     inputfile = File.open ('file.example')#file.example should be replaced with local file
     filehash = OpenSSL::Digest.new('sha256', 'inputfile')
     puts "#{inputfile} has #{filehash.name} hash of #{filehash}"#debug
-    end
+end
