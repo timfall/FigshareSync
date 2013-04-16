@@ -1,5 +1,7 @@
-#!usr/bin/ruby
+#!/usr/bin/ruby
 
-class remotearticle
-    def getremote
-        
+class article
+    def initialize (name, localpath)
+        @name = name
+        @path = localpath
+    end
