@@ -16,3 +16,18 @@ class Article
         puts "#{inputfile.path} has #{filehash.name} hash of #{filehash}"#debug
         return filehash
     end
+    
+    def populate
+        @views
+        @downloads
+        @shares
+        @handleurl
+        @status
+        @publishdata
+        @totalsize
+        @owner
+        @authors
+        @tags
+        @categories
+        @files
+    end
