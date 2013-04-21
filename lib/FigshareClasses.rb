@@ -1,5 +1,8 @@
 #!/usr/bin/ruby
 
+require 'json'
+require 'oauth'
+
 class Article
     def initialize (name, localpath, id, title, description, defined_type)
         @name = name
@@ -17,17 +20,32 @@ class Article
         return filehash
     end
     
-    def populate
-        @views
-        @downloads
-        @shares
-        @handleurl
-        @status
-        @publishdata
-        @totalsize
-        @owner
-        @authors
-        @tags
-        @categories
-        @files
+    def populate (authtoken)
+        form = authtoken.get ('/v1/my_data/articles/#{@id}')
+        form = JSON.parse(form.body)
+        @views = form['views']
+        @downloads = form['downloads']
+        @shares = form['shares']
+        @handleurl = form['handle_url']
+        @status = form['status']
+        @publisheddata = form['published_data']
+        @totalsize = form['total_size']
+        @owner = form['owners']
+        @authors = form['authors']
+        @tags = form['tags']
+        @categories = form['categories']
+        @files = form['files']
     end
+    
+class ArticleDatabase
+    def initialize (count, authtoken, localpath)
+        db = authtoken.get ('/v1/my_data/articles')
+        db = JSON.parse (db.body)
+        articledatabase
+        for db[:item].each_object do |article_id|
+            articledatabase[article_id] = Article.new(db[:item{:name}], '#{localpath}/localdb/#{article_id}', db[:item{:article_id}], db[:item{:title}], db[:item{:description}], db[:item{:defined_type}])#create new article entry for each article listed
+            aritcledatabase[article_id].populate(authtoken)
+        done
+        return articledatabase
+    end
+end
