@@ -45,7 +45,7 @@ auth = OauthFighshare.new(consumerkey, consumersecret, accesstoken, accesstokens
 puts "Successfully authenticated"
 
 #Create article database and populate from local sources
-if File.exists?("#{absworkingdir}/localdb.json")
+if File.exists?("#{absworkingdir}/localdb.json") then
 	puts "Local database detected, populating from there"
 	ldb = JSON.parse("#{absworkingdir}/localdb.json")
 	@i = ldb['count']
@@ -53,6 +53,7 @@ if File.exists?("#{absworkingdir}/localdb.json")
 		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
 	done
 	puts "Done populating the local list from local database"
+end
 else
 	puts "No local database detected, grabbing one from the server"
 	ldb = auth.get('v1/my_data/articles')
@@ -64,7 +65,7 @@ else
 		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
 	done
 	puts "Local database file created and populated from server"
-done
+end
 
 #Compare local and remote databses for differences
 rdb = auth.get('v1/my_data/articles')
@@ -81,7 +82,7 @@ for i.times do
 	if rdb[i].id == ldb[r].id
 		if @remotehash != @localhash
 			puts "Hash mismatch! #{remotearticlelist[i].name} and #{localarticlelist[r].name} do not match"
-			if File.mtime(remotearticlelist[i].path) >= File.mtime(localarticlelist[r].path)#If remote version is newer than local
+			if File.mtime(remotearticlelist[i].path) >= File.mtime(localarticlelist[r].path) then#If remote version is newer than local
 				File.new('#{absworkingdir}/localdb/#{remotearticlelist[i].name}', "w") = auth.get(remotearticlelist[i].path)#download remote version
 				localarticlelist[r] = Article.new(rdb[i].name, "#{absworkingdir}/localdb/#{rbd[i].name}", rbd[i].id)#create new local article entry
 				download = auth.get(remotearticlelist[i].path)
