@@ -51,7 +51,7 @@ if File.exists?("#{absworkingdir}/localdb.json") then
 	@i = ldb['count']
 	for @i.times do
 		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
-	done
+	end
 	puts "Done populating the local list from local database"
 end
 else
@@ -63,7 +63,7 @@ else
 	i = ldb['count']
 	for i.times do
 		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
-	done
+	end
 	puts "Local database file created and populated from server"
 end
 
@@ -74,7 +74,7 @@ i = rdb[count]
 r = ldb[count]
 for i.times do
 	remotearticlelist[i] = Article.new(rdb[i].name, "v1/my_data/articles/#{ldb[i].name}", rdb[i].id, rdb[i].title, rdb[i].description, rdb[i].defined_type)
-done
+end
 for i.times do
 	for r.times do
 	@remotehash = remotearticlelist[i].hash
@@ -97,6 +97,6 @@ for i.times do
 		end
 	end
 	next
-	done
-done
+	end
+end
 puts "All hashes match"
