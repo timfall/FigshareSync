@@ -35,7 +35,7 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
-	File.new("#{absworkingdir}/FirstRun.lock", "r")
+	File.new("#{absworkingdir}/FirstRun.lock", "w")
 end
 #oauth authenticate
 auth = OauthFighshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
