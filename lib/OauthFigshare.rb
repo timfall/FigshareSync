@@ -1,5 +1,7 @@
 #!/usr/bin/ruby
 
+require 'oauth'
+
 class OauthFigshare
     def initialize (consumerkey, consumersecret, accesstoken, accesstokensecret)
         @consumerkey = consumerkey
