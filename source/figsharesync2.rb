@@ -13,12 +13,15 @@ accesstokensecret = nil
 localarticlelist = nil
 
 #First run setup
+puts workingdir#debug
 absworkingdir = File.expand_path(workingdir)
+puts absworkingdir#debug
 if File.exist?("#{absworkingdir}/FirstRun.lock") == false
     puts "This appears to be the first run of FigShare Sync. We'll setup a few things."
 	print "Where would you like to store settings and files? [~./figsharesync]: "
 	@input = gets.chomp
-		if @input != nil
+    puts @input#debug
+		if @input.empty? == false
 			workingdir = @input
 			absworkingdir = File.expand_path(workingdir)
 		end
@@ -31,6 +34,7 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	print "Please enter OAuth access token secret: "
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
+    puts absworkingdir#debug
 	File.new("#{absworkingdir}/FirstRun.lock", "r")
 end
 #oauth authenticate
