@@ -2,15 +2,15 @@
 
 require 'json'
 require 'oauth'
-require '../lib/OauthFigshare'
-require '../lib/FigshareClasses'
+require './lib/OauthFigshare'
+require './lib/FigshareClasses'
 
 workingdir = "~/.figsharesync/"
-consumerkey
-consumersecret
-accesstoken
-accesstokensecret
-localarticlelist
+consumerkey = nil
+consumersecret = nil
+accesstoken = nil
+accesstokensecret = nil
+localarticlelist = nil
 
 #First run setup
 absworkingdir = File.expand_path(workingdir)
