@@ -5,7 +5,7 @@ require 'oauth'
 require './lib/OauthFigshare'
 require './lib/FigshareClasses'
 
-workingdir = "~/.figsharesync/"
+workingdir = "~/465375/.figsharesync/"
 consumerkey = nil
 consumersecret = nil
 accesstoken = nil
@@ -37,7 +37,7 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
-	File.new("#{absworkingdir}/FirstRun.lock", "w")
+	File.open("#{absworkingdir}/FirstRun.lock", "w"){}
 end
 #oauth authenticate
 auth = OauthFighshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
