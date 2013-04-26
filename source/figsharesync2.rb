@@ -16,6 +16,8 @@ localarticlelist = nil
 puts workingdir#debug
 absworkingdir = File.expand_path(workingdir)
 puts absworkingdir#debug
+puts File.exist?("#{absworkingdir}/FirstRun.lock")#debug
+puts File.exist?("~/FirstRun.lock")#debug
 if File.exist?("#{absworkingdir}/FirstRun.lock") == false
     puts "This appears to be the first run of FigShare Sync. We'll setup a few things."
 	print "Where would you like to store settings and files? [~./figsharesync]: "
@@ -54,7 +56,6 @@ File.exists?("#{absworkingdir}/localdb.json") {
 	end
 	puts "Done populating the local list from local database"
 }
-#else
 	puts "No local database detected, grabbing one from the server"
 	ldb = auth.get('v1/my_data/articles')
 	ldb = JSON.parse(ldb.body)
@@ -65,7 +66,6 @@ File.exists?("#{absworkingdir}/localdb.json") {
 		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
 	end
 	puts "Local database file created and populated from server"
-#end
 
 #Compare local and remote databses for differences
 rdb = auth.get('v1/my_data/articles')
