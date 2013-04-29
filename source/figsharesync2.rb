@@ -5,7 +5,7 @@ require 'oauth'
 require './lib/OauthFigshare'
 require './lib/FigshareClasses'
 
-workingdir = "~/465375/.figsharesync/"
+workingdir = "~/465375/.figsharesync/"#Cloud 9 specific workaround for user directory
 consumerkey = nil
 consumersecret = nil
 accesstoken = nil
@@ -37,9 +37,30 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
+    File.open("#{absworkingdir}/oauth/tokens.oauth", "w")
+    {
+        |file|
+        file.write (consumerkey)
+        file.write (consumersecret)
+        file.write (accesstoken)
+        file.write (accesstokensecret)
+        file.close
+    }
 	File.open("#{absworkingdir}/FirstRun.lock", "w"){}
 end
 #oauth authenticate
+@oauthvariables = nil
+File.open("#{absworkingdir}/oauth/tokens.oauth", "r+")
+    {
+        |file|
+        @oauthvariables = file.readlines
+        file.close
+    }
+consumerkey = @oauthvariables[1]
+consumersecret = @oauthvariables[2]
+accesstoken = @oauthvariables[3]
+accesstokensecret = @oauthvariables[4]
+
 auth = OauthFighshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
 	if auth.header (v1/my_data/articles) == Net::HTTPUnauthorized
 		puts "Figshare returned #{auth.header (v1/my_data/articles)}"
