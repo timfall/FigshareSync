@@ -37,22 +37,18 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
-    File.open("#{absworkingdir}/oauth/tokens.oauth", "w")
-    {
-        |file|
-        file.write (consumerkey)
-        file.write (consumersecret)
-        file.write (accesstoken)
-        file.write (accesstokensecret)
+    File.open("#{absworkingdir}/oauth/tokens.oauth", "w") {|file|
+        file.write ("#{consumerkey}\n")
+        file.write ("#{consumersecret}\n")
+        file.write ("#{accesstoken}\n")
+        file.write ("#{accesstokensecret}\n")
         file.close
     }
 	File.open("#{absworkingdir}/FirstRun.lock", "w"){}
 end
 #oauth authenticate
-@oauthvariables = nil
-File.open("#{absworkingdir}/oauth/tokens.oauth", "r+")
-    {
-        |file|
+@oauthvariables
+File.open("#{absworkingdir}/oauth/tokens.oauth", "r+") {|file|
         @oauthvariables = file.readlines
         file.close
     }
