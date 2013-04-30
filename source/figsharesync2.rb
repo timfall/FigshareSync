@@ -57,8 +57,9 @@ consumersecret = @oauthvariables[2]
 accesstoken = @oauthvariables[3]
 accesstokensecret = @oauthvariables[4]
 
-auth = OauthFighshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
-	if auth.header (v1/my_data/articles) == Net::HTTPUnauthorized
+auth = OauthFigshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
+	articleresponse = auth.get('/v1/my_data/articles')
+    if articleresponse.header == Net::HTTPUnauthorized
 		puts "Figshare returned #{auth.header (v1/my_data/articles)}"
 	end
 puts "Successfully authenticated"
