@@ -2,7 +2,7 @@
 
 require 'oauth'
 
-class OauthFigshare
+class OauthFigshare < OAuth::AccessToken
     def initialize (consumerkey, consumersecret, accesstoken, accesstokensecret)
         @consumerkey = consumerkey
         @consumersecret = consumersecret

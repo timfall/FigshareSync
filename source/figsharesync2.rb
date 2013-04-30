@@ -26,6 +26,7 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 		if @input.empty? == false
 			workingdir = @input
 			absworkingdir = File.expand_path(workingdir)
+            Dir.open(absworkingdir){}
 		end
 	print "Please enter OAuth consumer key: "
 	consumerkey = gets.chomp
@@ -37,6 +38,8 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 	accesstokensecret = gets.chomp
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
+    Dir.open(absworkingdir){}
+    Dir.open("#{absworkingdir}/oauth")
     File.open("#{absworkingdir}/oauth/tokens.oauth", "w") {|file|
         file.write ("#{consumerkey}\n")
         file.write ("#{consumersecret}\n")

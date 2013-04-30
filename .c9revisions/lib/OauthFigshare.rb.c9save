@@ -25,3 +25,6 @@
 {"ts":1367281524229,"patch":[[{"diffs":[[0,"igshare\n"],[1,"    include OAuth\n"],[0,"    def "]],"start1":46,"start2":46,"length1":16,"length2":34}]],"length":629,"saved":false}
 {"ts":1367281707019,"patch":[[{"diffs":[[0,"    "],[-1,"include "],[1,"append_features("],[0,"OAuth"],[1,")"],[0,"\n   "]],"start1":54,"start2":54,"length1":21,"length2":30}]],"length":638,"saved":false}
 {"ts":1367281736466,"patch":[[{"diffs":[[0,"are\n"],[-1,"    append_features(OAuth)\n"],[0,"    "]],"start1":50,"start2":50,"length1":35,"length2":8}]],"length":611,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1367299490325,"patch":[[{"diffs":[[0,"Figshare"],[1," < OAuth::AccessToken"],[0,"\n    def"]],"start1":45,"start2":45,"length1":16,"length2":37}]],"length":632,"saved":false}
+{"ts":1367299737449,"patch":[[{"diffs":[[0," < OAuth"],[-1,"::AccessToken"],[0,"\n    def"]],"start1":53,"start2":53,"length1":29,"length2":16}]],"length":619,"saved":false}
+{"ts":1367299784830,"patch":[[{"diffs":[[0," < OAuth"],[1,"::AccessToken"],[0,"\n    def"]],"start1":53,"start2":53,"length1":16,"length2":29}]],"length":632,"saved":false}
