@@ -26,20 +26,32 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 		if @input.empty? == false
 			workingdir = @input
 			absworkingdir = File.expand_path(workingdir)
-            Dir.open(absworkingdir){}
+            Dir.mkdir(absworkingdir) if Dir.exists?(absworkingdir) == false
 		end
 	print "Please enter OAuth consumer key: "
 	consumerkey = gets.chomp
+        #if consumerkey.length != 22
+            #puts "Consumer key appears to be the wrong length"
+        #end
 	print "Please enter OAuth consumer key secret: "
 	consumersecret = gets.chomp
+        #if consumersecret.length != 22
+            #puts "Consumer secret appears to be the wrong length"
+        #end
 	print "Please enter OAuth access token: "
 	accesstoken = gets.chomp
+        #if accesstoken.length != 
+            #puts "Access token appears to be the wrong length"
+        #end
 	print "Please enter OAuth access token secret: "
 	accesstokensecret = gets.chomp
+        #if accesstokensecret.length != 
+            #puts "Access token secret appears to be the wrong length"
+        #end
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
-    Dir.open(absworkingdir){}
-    Dir.open("#{absworkingdir}/oauth")
+    Dir.mkdir(absworkingdir) if Dir.exists?(absworkingdir) == false
+    Dir.mkdir("#{absworkingdir}/oauth") if Dir.exists?("#{absworkingdir}/oauth") == false
     File.open("#{absworkingdir}/oauth/tokens.oauth", "w") {|file|
         file.write ("#{consumerkey}\n")
         file.write ("#{consumersecret}\n")
