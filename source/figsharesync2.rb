@@ -67,10 +67,10 @@ File.open("#{absworkingdir}/oauth/tokens.oauth", "r+") {|file|
         @oauthvariables = file.readlines
         file.close
     }
-consumerkey = @oauthvariables[0]
-consumersecret = @oauthvariables[1]
-accesstoken = @oauthvariables[2]
-accesstokensecret = @oauthvariables[3]
+consumerkey = @oauthvariables[0].chomp
+consumersecret = @oauthvariables[1].chomp
+accesstoken = @oauthvariables[2].chomp
+accesstokensecret = @oauthvariables[3].chomp
 
 auth = OauthFigshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
 puts consumerkey#debug
@@ -96,7 +96,7 @@ File.exists?("#{absworkingdir}/localdb.json") {
 	puts "Done populating the local list from local database"
 }
 	puts "No local database detected, grabbing one from the server"
-	ldb = auth.get('v1/my_data/articles')
+	ldb = auth.get('/v1/my_data/articles')
 	ldb = JSON.parse(ldb.body)
 	@local = File.new("#{absworkingdir}/localdb.json", "w")
 	@local << ldb
@@ -109,10 +109,10 @@ File.exists?("#{absworkingdir}/localdb.json") {
 #Compare local and remote databses for differences
 rdb = auth.get('v1/my_data/articles')
 rdb = JSON.parse(rdb.body)
-i = rdb[count]
-r = ldb[count]
+i = rdb['count']
+r = ldb['count']
 i.times do
-	remotearticlelist[i] = Article.new(rdb[i].name, "v1/my_data/articles/#{ldb[i].name}", rdb[i].id, rdb[i].title, rdb[i].description, rdb[i].defined_type)
+	remotearticlelist[i] = Article.new(rdb[i].name, "/v1/my_data/articles/#{ldb[i].name}", rdb[i].id, rdb[i].title, rdb[i].description, rdb[i].defined_type)
 end
 i.times do
     r.times do

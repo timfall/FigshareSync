@@ -1,2 +1,0 @@
-{"ts":1365807032725,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"gem \"oauth\"\ngem \"json\"\n"]],"start1":0,"start2":0,"length1":0,"length2":23}]],"length":23}
-{"contributors":[],"silentsave":false,"ts":1365910087430,"patch":[[{"diffs":[[0,"m \"json\""],[-1,"\n"]],"start1":14,"start2":14,"length1":9,"length2":8}]],"length":22,"saved":false}

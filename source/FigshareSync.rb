@@ -2,8 +2,8 @@
 
 require 'oauth'
 require 'json'
-require '../lib/OauthFigshare'
-require '../lib/FigshareClasses'
+require './lib/OauthFigshare'
+require './lib/FigshareClasses'
 
 consumer = OAuth::Consumer.new('NXueJD2t1DMXN7cmBgmcnA','aNZEUQdeYpXWSsu0INnw7A',{:site=>"http://api.figshare.com"})
 token = { :oauth_token => 'Ep6EHnBqnazUeeKfTQn9HwrC7mvfwynQHr00mAZo07iwEp6EHnXqnazUeeKfTQn9Hw', :oauth_token_secret => 'soPdczGixUt3JKEKw51AQA'}

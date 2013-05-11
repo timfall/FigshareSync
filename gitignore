@@ -1,5 +1,5 @@
 ./oauth
 file.example
 figsharesync-test.rb
-./.figsharesync/*
-.c9revisions/
+.figsharesync/*
+.c9revisions/*
