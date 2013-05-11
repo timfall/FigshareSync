@@ -67,16 +67,22 @@ File.open("#{absworkingdir}/oauth/tokens.oauth", "r+") {|file|
         @oauthvariables = file.readlines
         file.close
     }
-consumerkey = @oauthvariables[1]
-consumersecret = @oauthvariables[2]
-accesstoken = @oauthvariables[3]
-accesstokensecret = @oauthvariables[4]
+consumerkey = @oauthvariables[0]
+consumersecret = @oauthvariables[1]
+accesstoken = @oauthvariables[2]
+accesstokensecret = @oauthvariables[3]
 
 auth = OauthFigshare.new(consumerkey, consumersecret, accesstoken, accesstokensecret)
+puts consumerkey#debug
+puts consumersecret#debug
+puts accesstoken#debug
+puts accesstokensecret#debug
+puts auth#debug
 	articleresponse = auth.get('/v1/my_data/articles')
     if articleresponse.header == Net::HTTPUnauthorized
-		puts "Figshare returned #{auth.header (v1/my_data/articles)}"
+		puts "Figshare returned #{articleresponse.header (v1/my_data/articles)}"
 	end
+puts articleresponse.header#debug
 puts "Successfully authenticated"
 
 #Create article database and populate from local sources
