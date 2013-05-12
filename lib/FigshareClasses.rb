@@ -39,7 +39,7 @@ class Article
 end
     
 class ArticleDatabase
-    def initialize (count, authtoken, localpath)
+    def initialize (authtoken, localpath)
         db = authtoken.get ('/v1/my_data/articles')
         db = JSON.parse (db.body)
         articledatabase
