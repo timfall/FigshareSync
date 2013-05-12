@@ -42,7 +42,6 @@ class ArticleDatabase
     def initialize (authtoken, localpath)
         db = authtoken.get ('/v1/my_data/articles')
         db = JSON.parse (db.body)
-        articledatabase
         db[:item].each_object do |article_id|
             articledatabase[article_id] = Article.new(db[:item]['name'], '#{localpath}/localdb/#{article_id}', db[:item]['article_id'], db[:item]['title'], db[:item]['description'], db[:item]['defined_type'])#create new article entry for each article listed
             aritcledatabase[article_id].populate(authtoken)
