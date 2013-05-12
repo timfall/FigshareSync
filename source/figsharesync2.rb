@@ -77,10 +77,7 @@ puts "Successfully authenticated"
 File.exists?("#{absworkingdir}/localdb.json") {
 	puts "Local database detected, populating from there"
 	ldb = JSON.parse("#{absworkingdir}/localdb.json")
-	@i = ldb['count']
-	@i.times do
-		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
-	end
+	localarticlelist = ArticleDatabase.new(auth, "#{absworkingdir}/localdb.json")
 	puts "Done populating the local list from local database"
 }
 	puts "No local database detected, grabbing one from the server"
@@ -88,10 +85,7 @@ File.exists?("#{absworkingdir}/localdb.json") {
 	ldb = JSON.parse(ldb.body)
 	@local = File.new("#{absworkingdir}/localdb.json", "w")
 	@local << ldb
-	i = ldb['count']
-	i.times do
-		localarticlelist[i] = Article.new(ldb[i].name, "#{absworkingdir}/localdb/#{ldb[i].name}", ldb[i].id, ldb[i].title, ldb[i].description, ldb[i].defined_type)
-	end
+	localarticlelist = ArticleDatabase.new(auth, "#{absworkingdir}/localdb.json")
 	puts "Local database file created and populated from server"
 
 #Compare local and remote databses for differences
