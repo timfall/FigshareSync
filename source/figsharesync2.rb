@@ -30,24 +30,12 @@ if File.exist?("#{absworkingdir}/FirstRun.lock") == false
 		end
 	print "Please enter OAuth consumer key: "
 	consumerkey = gets.chomp
-        #if consumerkey.length != 22
-            #puts "Consumer key appears to be the wrong length"
-        #end
 	print "Please enter OAuth consumer key secret: "
 	consumersecret = gets.chomp
-        #if consumersecret.length != 22
-            #puts "Consumer secret appears to be the wrong length"
-        #end
 	print "Please enter OAuth access token: "
 	accesstoken = gets.chomp
-        #if accesstoken.length != 
-            #puts "Access token appears to be the wrong length"
-        #end
 	print "Please enter OAuth access token secret: "
 	accesstokensecret = gets.chomp
-        #if accesstokensecret.length != 
-            #puts "Access token secret appears to be the wrong length"
-        #end
 	puts "Great! we'll get running now..."
     puts absworkingdir#debug
     Dir.mkdir(absworkingdir) if Dir.exists?(absworkingdir) == false
