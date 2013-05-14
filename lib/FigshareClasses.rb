@@ -49,6 +49,7 @@ class ArticleDatabase
             @path = "#{localpath}/localdb"
         else
             puts "Incorrect type. Must be 'remote' or 'local'."
+            break
         end
         db = JSON.parse (db.body)
         db[:item].each_object do |article_id|
