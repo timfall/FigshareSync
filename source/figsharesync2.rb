@@ -110,7 +110,7 @@ i.times do
 				@local.gsub(localarticlelist[r], download)#replace entry in localdb.json DOES NOT WORK
 			elsif File.mtime(remotearticlelist[i].path) <= File.mtime(localarticlelist[r].path)#If local version is newer than remote
 				localfile = JSON.pretty_generate('Title' => localarticlelist[r].title, 'description' => localarticlelist[r].description, 'defined_type' => localarticlelist[r].defined_type)#generate a json list from the object
-				auth.post('v1/my_data/articles/', localfile, {"Content-Type" => "application/json"})#upload json list
+				auth.post("v1/my_data/articles/#{localarticlelist[r].article_id}", localfile, {"Content-Type" => "application/json"})#upload json list
 			end
 		end
 	end
