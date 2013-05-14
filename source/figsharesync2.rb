@@ -77,7 +77,7 @@ puts "Successfully authenticated"
 File.exists?("#{absworkingdir}/localdb.json") {
 	puts "Local database detected, populating from there"
 	ldb = JSON.parse("#{absworkingdir}/localdb.json")
-	localarticlelist = ArticleDatabase.new(auth, absworkingdir")
+	localarticlelist = ArticleDatabase.new(auth, 'local', absworkingdir)
 	puts "Done populating the local list from local database"
 }
 	puts "No local database detected, grabbing one from the server"
@@ -85,7 +85,7 @@ File.exists?("#{absworkingdir}/localdb.json") {
 	ldb = JSON.parse(ldb.body)
 	@local = File.new("#{absworkingdir}/localdb.json", "w")
 	@local << ldb
-	localarticlelist = ArticleDatabase.new(auth, absworkingdir)
+	localarticlelist = ArticleDatabase.new(auth, 'local', absworkingdir)
 	puts "Local database file created and populated from server"
 
 #Compare local and remote databses for differences
@@ -93,7 +93,7 @@ rdb = auth.get('v1/my_data/articles')
 rdb = JSON.parse(rdb.body)
 i = rdb['count']
 r = ldb['count']
-remotearticlelist = ArticleDatabase.new(auth, absworkingdir)#needs seperate path for remote database
+remotearticlelist = ArticleDatabase.new(auth, 'remote')
 i.times do
     r.times do
 	@remotehash = remotearticlelist[i].hash
@@ -102,12 +102,12 @@ i.times do
 		if @remotehash != @localhash
 			puts "Hash mismatch! #{remotearticlelist[i].name} and #{localarticlelist[r].name} do not match"
 			if File.mtime(remotearticlelist[i].path) >= File.mtime(localarticlelist[r].path)#If remote version is newer than local
-				File.new('#{absworkingdir}/localdb/#{remotearticlelist[i].name}', "w") {|file| file.write(auth.get(remotearticlelist[i].path))}#download remote version
+				File.new("#{absworkingdir}/localdb/#{remotearticlelist[i].name}", "w") {|file| file.write(auth.get(remotearticlelist[i].path))}#download remote version
 				localarticlelist[r] = Article.new(rdb[i].name, "#{absworkingdir}/localdb/#{rbd[i].name}", rbd[i].id)#create new local article entry
 				download = auth.get(remotearticlelist[i].path)
 				download = JSON.parse(download.body)
-				@local = File.read("#{absworkingdir}/localdb.json")
-				#@local.gsub(/pattern/) { matchmatchmatch } #replace entry in localdb.json
+				@local = File.open("#{absworkingdir}/localdb.json", 'w+')
+				@local.gsub(localarticlelist[r], download)#replace entry in localdb.json DOES NOT WORK
 			elsif File.mtime(remotearticlelist[i].path) <= File.mtime(localarticlelist[r].path)#If local version is newer than remote
 				localfile = JSON.pretty_generate('Title' => localarticlelist[r].title, 'description' => localarticlelist[r].description, 'defined_type' => localarticlelist[r].defined_type)#generate a json list from the object
 				auth.post('v1/my_data/articles/', localfile, {"Content-Type" => "application/json"})#upload json list
