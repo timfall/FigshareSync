@@ -4,9 +4,9 @@ require 'json'
 require 'oauth'
 
 class Article
-    def initialize (name, localpath, id, title, description, defined_type)
+    def initialize (name, path, id, title, description, defined_type)
         @name = name
-        @path = localpath
+        @path = path
         @id = id
         @title = title
         @description = description
