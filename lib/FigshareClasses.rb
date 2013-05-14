@@ -39,8 +39,9 @@ class Article
 end
     
 class ArticleDatabase
-    def initialize (authtoken, localpath)
-        db = authtoken.get ('/v1/my_data/articles')
+    def initialize (authtoken, {type, localdbfile})
+        if type == "remote" {db = authtoken.get ('/v1/my_data/articles')}
+        elsif type == "local" {db.body = localdbfile}
         db = JSON.parse (db.body)
         db[:item].each_object do |article_id|
             articledatabase[article_id] = Article.new(db[:item]['name'], '#{localpath}/localdb/#{article_id}', db[:item]['article_id'], db[:item]['title'], db[:item]['description'], db[:item]['defined_type'])#create new article entry for each article listed
