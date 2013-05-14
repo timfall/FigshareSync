@@ -47,6 +47,8 @@ class ArticleDatabase
         elsif type == 'local'
             db.body = localdbfile
             @path = "#{localpath}/localdb"
+        else
+            puts "Incorrect type. Must be 'remote' or 'local'."
         end
         db = JSON.parse (db.body)
         db[:item].each_object do |article_id|
