@@ -20,8 +20,10 @@ class Article
         return filehash
     end
     
-    def populate (authtoken)
-        form = authtoken.get ('/v1/my_data/articles/#{@id}')
+    def populate (authtoken, *formdata)
+        if formdata.exists? == false
+            form = authtoken.get ('/v1/my_data/articles/#{@id}')
+        else
         form = JSON.parse(form.body)
         @views = form['views']
         @downloads = form['downloads']
