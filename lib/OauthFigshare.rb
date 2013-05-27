@@ -14,7 +14,7 @@ class OauthFigshare < OAuth::AccessToken
         @token = { :oauth_token => @accesstoken,:oauth_token_secret => @accesstokensecret}
         
         @client = OAuth::AccessToken.from_hash(@consumer, @token)
-        super
+        #super
         return @client
     end
 end
