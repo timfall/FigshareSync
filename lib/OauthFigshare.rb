@@ -3,7 +3,7 @@
 require 'oauth'
 
 class OauthFigshare < OAuth::AccessToken
-    def initialize (consumerkey, consumersecret, accesstoken, accesstokensecret)
+    def self.new (consumerkey, consumersecret, accesstoken, accesstokensecret)
         @consumerkey = consumerkey
         @consumersecret = consumersecret
         @accesstoken = accesstoken
@@ -14,8 +14,6 @@ class OauthFigshare < OAuth::AccessToken
         @token = { :oauth_token => @accesstoken,:oauth_token_secret => @accesstokensecret}
         
         @client = OAuth::AccessToken.from_hash(@consumer, @token)
-    end
-    def self.new
         super
         return @client
     end

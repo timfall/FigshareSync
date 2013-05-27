@@ -24,6 +24,8 @@ class Article
         if formdata.exists? == false
             form = authtoken.get ('/v1/my_data/articles/#{@id}')
         else
+            form.body = formdata
+        end
         form = JSON.parse(form.body)
         @views = form['views']
         @downloads = form['downloads']
@@ -51,7 +53,6 @@ class ArticleDatabase
             @path = "#{localpath}/localdb"
         else
             puts "Incorrect type. Must be 'remote' or 'local'."
-            break
         end
         db = JSON.parse (db.body)
         db[:item].each_object do |article_id|
