@@ -43,7 +43,7 @@ class Article
 end
     
 class ArticleDatabase
-    def initialize (authtoken, type, *localdbfile, *localdbpath)
+    def initialize (authtoken, type, localdbpath = nil, *localdbfile)
         @path = nil
         if type == 'remote'
             db = authtoken.get ('/v1/my_data/articles')
@@ -51,7 +51,11 @@ class ArticleDatabase
             @path = '/v1/my_data/articles'
         elsif type == 'local'
             db = localdbfile
-            @path = "#{localdbpath}/localdb"
+            if localdbpath != nil
+                @path = "#{localdbpath}/localdb"
+            else
+                puts "No local database path supplied"
+            end
         else
             puts "Incorrect type. Must be 'remote' or 'local'."
         end
