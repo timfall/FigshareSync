@@ -47,14 +47,15 @@ class ArticleDatabase
         @path = nil
         if type == 'remote'
             db = authtoken.get ('/v1/my_data/articles')
+            db = db.body
             @path = '/v1/my_data/articles'
         elsif type == 'local'
-            db.body = localdbfile
+            db = localdbfile
             @path = "#{localpath}/localdb"
         else
             puts "Incorrect type. Must be 'remote' or 'local'."
         end
-        db = JSON.parse (db.body)
+        db = JSON.parse (db)
         db[:item].each_object do |article_id|
             articledatabase[article_id] = Article.new(db[:item]['name'], "#{@path}/#{article_id}", db[:item]['article_id'], db[:item]['title'], db[:item]['description'], db[:item]['defined_type'])#create new article entry for each article listed
             aritcledatabase[article_id].populate(authtoken)
