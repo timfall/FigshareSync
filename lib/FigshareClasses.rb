@@ -51,7 +51,8 @@ class ArticleDatabase
             @path = '/v1/my_data/articles'
         elsif type == 'local'
             db = localdbfile
-            @path = "#{absworkingdir}/localdb"
+            localdbpath = localdbfile.delete '/localdb.json'
+            @path = "#{localdbpath}/localdb"
         else
             puts "Incorrect type. Must be 'remote' or 'local'."
         end
